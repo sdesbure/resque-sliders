@@ -32,6 +32,7 @@
     <tr>
       <th>Hostname</th>
       <th>Current / Max Workers</th>
+      <th>Queues</th>
       <th>Controls</th>
     </tr>
     <% @sliders.all_hosts.each do |host| %>
@@ -43,6 +44,7 @@
       <%= [@sliders.current_children(host), @sliders.max_children(host)].compact.join(' / ') %>
       <% end %>
       </td>
+      <td><%= @sliders.queue_values(host).map { |k,v| "#{k} => #{v}" }.join("<br>") %></td>
       <td>
         <ul>
           <span class="controls">
