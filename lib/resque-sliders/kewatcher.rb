@@ -65,7 +65,7 @@ module Resque
 
               while @pids.keys.length < @max_children && (@need_queues.length > 0 || @dead_queues.length > 0)
                 queue = @dead_queues.shift || @need_queues.shift
-                @pids.store(fork { exec("rake#{' -f ' + @rakefile if @rakefile}#{' environment' if ENV['RAILS_ENV']} resque:work QUEUE=#{queue}") }, queue) # store offset if linux fork() ?
+                @pids.store(fork { exec("rake#{' -f ' + @rakefile if @rakefile}#{' environment' if ENV['RAILS_ENV']} resque:work QUEUE=#{queue} --trace") }, queue) # store offset if linux fork() ?
                 procline
               end
             end
